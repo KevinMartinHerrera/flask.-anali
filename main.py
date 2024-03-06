@@ -1,17 +1,19 @@
 from flask import Flask, request, jsonify, render_template
 import analizador_lexico as lex
+import analizador_Sintactico as yacc 
 
 app = Flask('app')
 
 @app.route('/')
 def hello_world():
+    lex.reset_lexer()  # Reiniciar el contador de líneas
     return render_template('index.html')
+
 
 @app.route('/api/v1/lexer', methods=['POST'])
 def lexer():
     data = request.get_json()
     code = data.get('code')
-
 
     lex.lexer.input(code)
 
@@ -27,11 +29,20 @@ def lexer():
             'lexpos': tok.lexpos
         })
 
+    # Invoca el analizador sintáctico
+    debug_messages = []
+    resultado_sintactico = yacc.parse_code(code, debug=debug_messages)
 
     print("Code:", code)
     print("Tokens:", tokens)
+    print("Resultado Sintáctico:", resultado_sintactico)
+    print("Debug Messages:", debug_messages)
 
-    return render_template('result.html', code=code, tokens=tokens)
+    if resultado_sintactico["status"] == "success":
+        return render_template('result.html', code=code, tokens=tokens, resultado_sintactico=resultado_sintactico)
+    else:
+        return render_template('error.html', code=code, tokens=tokens, resultado_sintactico=resultado_sintactico, debug_messages=debug_messages)
+
 
 
 if __name__ == '__main__':

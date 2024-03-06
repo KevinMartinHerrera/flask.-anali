@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexer Tester</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    
 </head>
 <body>
     <h1>Lexer Tester</h1>
-    <textarea id="code" rows="4" cols="50"></textarea>
-    <br>
-    <button onclick="analyzeCode()">Analyze</button>
-    <br>
+    <div class="input-container">
+        <textarea id="code" rows="4" cols="50"></textarea>
+        <button onclick="analyzeCode()">Analizar codigo</button>
+    </div>
     <div id="resultContainer"></div> <!-- Nuevo div para mostrar el resultado -->
     <script>
       function analyzeCode() {

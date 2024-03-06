@@ -1,5 +1,3 @@
-/* styles.css */
-
 body, html {
     height: 100%;
     margin: 0;
@@ -7,38 +5,50 @@ body, html {
     flex-direction: column; /* Cambio para alinear los elementos verticalmente */
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #f8f9fa;
     font-family: 'Arial', sans-serif;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 800px; /* Ajuste del ancho máximo */
+    margin: 20px auto; /* Centrar el contenedor */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    text-align: center;
+}
+
 h1 {
-    color: #333;
+    color: #007bff;
 }
 
 textarea {
-    width: 90%;
-    max-width: 500px;
-    height: 100px; /* Altura ajustada para una sola línea */
-    margin: 10px 0;
-    padding: 0 5px; /* Ajuste para centrar el texto verticalmente */
-    border-radius: 5px;
+    width: 100%;
+    height: 150px;
+    margin: 15px 0;
+    padding: 10px;
     border: 1px solid #ccc;
+    border-radius: 5px;
     font-family: 'Monospace';
     font-size: 16px;
-    resize: none; /* Deshabilita la capacidad de redimensionar */
-    overflow: hidden; /* Evita el desbordamiento del texto */
+    resize: none;
 }
 
 button {
-    width: 90%;
-    max-width: 200px;
-    padding: 10px;
-    margin-top: 10px; /* Asegura que el botón esté debajo del textarea */
+    width: 100%;
+    max-width: 100%;
+    margin-top: 15px;
+    padding: 15px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -48,22 +58,25 @@ button:hover {
 }
 
 #resultContainer {
-    width: 90%;
-    max-width: 500px;
-    margin-top: 20px; /* Espacio entre el botón y el contenedor de resultados */
-    background-color: #fff;
-    border-radius: 5px;
+    margin-top: 20px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
     text-align: left;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    overflow-y: auto; /* Añade un scrollbar vertical si es necesario */
 }
 
-#resultContainer ul {
+ul {
+    max-height: 300px;
+    overflow-y: auto;
     list-style-type: none;
     padding: 0;
+    margin-top: 10px;
 }
 
-#resultContainer ul li {
+ul li {
     margin-bottom: 10px;
     font-family: 'Monospace';
 }
