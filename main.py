@@ -12,6 +12,7 @@ def hello_world():
 
 @app.route('/api/v1/lexer', methods=['POST'])
 def lexer():
+    
     data = request.get_json()
     code = data.get('code')
 
@@ -41,8 +42,8 @@ def lexer():
     if resultado_sintactico["status"] == "success":
         return render_template('result.html', code=code, tokens=tokens, resultado_sintactico=resultado_sintactico)
     else:
-        return render_template('error.html', code=code, tokens=tokens, resultado_sintactico=resultado_sintactico, debug_messages=debug_messages)
-
+        error_message = resultado_sintactico["message"]
+        return render_template('error.html', code=code, tokens=tokens, resultado_sintactico=resultado_sintactico, error_message=error_message, debug_messages=debug_messages)
 
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@
         <textarea id="code" rows="4" cols="50"></textarea>
         <button onclick="analyzeCode()">Analizar codigo</button>
     </div>
-    <div id="resultContainer"></div> <!-- Nuevo div para mostrar el resultado -->
+    <div id="resultContainer"></div> 
     <script>
       function analyzeCode() {
           const code = document.getElementById('code').value;
@@ -28,10 +28,10 @@
               if (!response.ok) {
                   throw new Error(`HTTP error! Status: ${response.status}`);
               }
-              return response.text();  // Obtener el contenido de la respuesta como texto
+              return response.text();  
           })
           .then(data => {
-              // Insertar el contenido HTML en el div resultContainer
+          
               document.getElementById('resultContainer').innerHTML = data;
           })
           .catch(error => console.error('Error:', error));

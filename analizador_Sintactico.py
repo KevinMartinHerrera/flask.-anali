@@ -78,8 +78,7 @@ def p_error(p):
     else:
         raise SyntaxError("Error de sintaxis: No se pudo construir el árbol de análisis.")
 
-
-parser = yacc.yacc()
+parser = yacc.yacc(errorlog=yacc.NullLogger())
 
 
 def parse_code(code, debug=None):

@@ -77,7 +77,7 @@ def p_error(p):
     if p:
         return f"Error de sintaxis en el token '{p.value}', tipo '{p.type}' en la línea {p.lineno}"
     else:
-        return "Error de sintaxis: No se pudo construir el árbol de análisis."
+        return "Error de sintaxis no valida"
 
 parser = yacc.yacc()
 
