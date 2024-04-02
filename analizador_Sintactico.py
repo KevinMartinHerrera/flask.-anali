@@ -18,9 +18,21 @@ def p_statement(p):
     statement : expression SEMICOLON
               | for_loop
               | println_statement
+              | nombre_assignment
+              | while_loop
     '''
     p[0] = "Declaración válida."
+    
+def p_nombre_assignment(p):
+    'nombre_assignment : NOMBRE EQUALS KEVIN'
+    p[0] = "Asignación de nombre a Kevin válida."
 
+def p_while_loop(p):
+    '''
+    while_loop : WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
+    '''
+    p[0] = "Bucle While válido."
+    
 def p_for_loop(p):
     '''
     for_loop : FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
@@ -29,7 +41,8 @@ def p_for_loop(p):
 
 def p_println_statement(p):
     '''
-    println_statement : SYSTEM DOT OUT DOT PRINTLN LPAREN expression RPAREN SEMICOLON
+    println_statement : PRINT LPAREN expression RPAREN SEMICOLON
+                      | PRINT LPAREN STRING RPAREN SEMICOLON
     '''
     p[0] = "Declaración de impresión válida."
 
@@ -70,6 +83,7 @@ def p_increment(p):
     increment : ID INCREMENT
     '''
     p[0] = "Incremento válido."
+
 
 def p_error(p):
     if p is not None:

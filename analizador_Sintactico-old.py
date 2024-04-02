@@ -25,9 +25,15 @@ def p_statement(p):
 
 def p_for_loop(p):
     '''
-    for_loop : FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
+    for_loop : FOR LPAREN for_assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
     '''
-    return "Bucle For válido."
+    p[0] = "Bucle For válido."
+
+def p_for_assignment(p):
+    '''
+    for_assignment : ID EQUALS NUMBER
+    '''
+    p[0] = "Asignación en bucle For válida."
 
 def p_println_statement(p):
     '''

@@ -11,7 +11,9 @@ reserved = {
     'string': 'STRING',
     'System': 'SYSTEM', 
     'out': 'OUT',
-    'println': 'PRINTLN',
+    'print': 'PRINT',
+    'while': 'WHILE'
+    
 }
 
 tokens = [
@@ -39,6 +41,8 @@ tokens = [
     'GREATER_THAN_EQUAL',
     'EQUAL_EQUAL',
     'NOT_EQUAL',
+    'NOMBRE',
+    'KEVIN',
 ] + list(reserved.values())
 
 # Reglas de expresiones regulares para tokens
@@ -89,12 +93,23 @@ def t_newline(t):
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+    
+def t_NOMBRE(t):
+    r'nombre'
+    return t
+
+# Asume que cualquier palabra que coincida exactamente con "Kevin" se trata como el token KEVIN
+def t_KEVIN(t):
+    r'Kevin'
+    return t
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'ID')
     t.lineno = t.lexer.lineno  
     return t
+
+
 
 
 

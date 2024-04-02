@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import analizador_lexico as lex
-import analizador_Sintactico as yacc 
+import analizador_Sintactico as yacc
 
 app = Flask('app')
 
