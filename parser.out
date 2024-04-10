@@ -2,159 +2,102 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    COLON
     COMMA
     DOT
     ELSE
-    FLOAT
+    FOR
     IF
-    INT
-    LEFT_BRACKET
-    OUT
-    RIGHT_BRACKET
-    SYSTEM
+    PRINT
+    WHILE
 
 Grammar
 
 Rule 0     S' -> program
-Rule 1     program -> statements
-Rule 2     statements -> statement
-Rule 3     statements -> statements statement
-Rule 4     statement -> expression SEMICOLON
-Rule 5     statement -> for_loop
-Rule 6     statement -> println_statement
-Rule 7     statement -> nombre_assignment
-Rule 8     statement -> while_loop
-Rule 9     nombre_assignment -> NOMBRE EQUALS KEVIN
-Rule 10    while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-Rule 11    for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-Rule 12    println_statement -> PRINT LPAREN expression RPAREN SEMICOLON
-Rule 13    println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON
-Rule 14    assignment -> ID EQUALS expression
-Rule 15    condition -> expression
-Rule 16    expression -> expression PLUS expression
-Rule 17    expression -> expression MINUS expression
-Rule 18    expression -> expression TIMES expression
-Rule 19    expression -> expression DIVIDE expression
-Rule 20    expression -> LPAREN expression RPAREN
-Rule 21    expression -> ID
-Rule 22    expression -> NUMBER
-Rule 23    expression -> INCREMENT
-Rule 24    expression -> STRING
-Rule 25    expression -> expression LESS_THAN expression
-Rule 26    expression -> expression GREATER_THAN expression
-Rule 27    expression -> expression LESS_THAN_EQUAL expression
-Rule 28    expression -> expression GREATER_THAN_EQUAL expression
-Rule 29    expression -> expression EQUAL_EQUAL expression
-Rule 30    expression -> expression NOT_EQUAL expression
-Rule 31    increment -> ID INCREMENT
+Rule 1     program -> object_declaration
+Rule 2     object_declaration -> OBJECT ID LBRACE main_declaration RBRACE
+Rule 3     main_declaration -> DEF MAIN LPAREN args LBRACE statements RBRACE
+Rule 4     args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
+Rule 5     block -> LBRACE statements RBRACE
+Rule 6     statements -> statement
+Rule 7     statements -> statements statement
+Rule 8     statement -> expression SEMICOLON
+Rule 9     statement -> println_statement
+Rule 10    statement -> assignment
+Rule 11    println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON
+Rule 12    println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON
+Rule 13    expression -> term
+Rule 14    expression -> expression PLUS term
+Rule 15    expression -> expression MINUS term
+Rule 16    term -> factor
+Rule 17    term -> term TIMES factor
+Rule 18    term -> term DIVIDE factor
+Rule 19    factor -> NUMBER
+Rule 20    factor -> ID
+Rule 21    factor -> LPAREN expression RPAREN
+Rule 22    assignment -> ID EQUALS expression
 
 Terminals, with rules where they appear
 
-COLON                : 
+ARGS                 : 4
+ARRAY                : 4
+COLON                : 4 4
 COMMA                : 
-DIVIDE               : 19
+DEF                  : 3
+DIVIDE               : 18
 DOT                  : 
 ELSE                 : 
-EQUALS               : 9 14
-EQUAL_EQUAL          : 29
-FLOAT                : 
-FOR                  : 11
-GREATER_THAN         : 26
-GREATER_THAN_EQUAL   : 28
-ID                   : 14 21 31
+EQUALS               : 4 22
+FOR                  : 
+ID                   : 2 20 22
 IF                   : 
-INCREMENT            : 23 31
-INT                  : 
-KEVIN                : 9
-LEFT_BRACE           : 10 11
-LEFT_BRACKET         : 
-LESS_THAN            : 25
-LESS_THAN_EQUAL      : 27
-LPAREN               : 10 11 12 13 20
-MINUS                : 17
-NOMBRE               : 9
-NOT_EQUAL            : 30
-NUMBER               : 22
-OUT                  : 
-PLUS                 : 16
-PRINT                : 12 13
-RIGHT_BRACE          : 10 11
-RIGHT_BRACKET        : 
-RPAREN               : 10 11 12 13 20
-SEMICOLON            : 4 11 11 12 13
-STRING               : 13 24
-SYSTEM               : 
-TIMES                : 18
-WHILE                : 10
+LBRACE               : 2 3 5
+LEFT_BRACKET         : 4
+LPAREN               : 3 11 12 21
+MAIN                 : 3
+MINUS                : 15
+NUMBER               : 19
+OBJECT               : 2
+PLUS                 : 14
+PRINT                : 
+PRINTLN              : 11 12
+RBRACE               : 2 3 5
+RIGHT_BRACKET        : 4
+RPAREN               : 4 11 12 21
+SEMICOLON            : 8 11 12
+STRING_LITERAL       : 12
+STRING_TYPE          : 4
+TIMES                : 17
+UNIT                 : 4
+WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-assignment           : 11
-condition            : 10 11
-expression           : 4 12 14 15 16 16 17 17 18 18 19 19 20 25 25 26 26 27 27 28 28 29 29 30 30
-for_loop             : 5
-increment            : 11
-nombre_assignment    : 7
-println_statement    : 6
+args                 : 3
+assignment           : 10
+block                : 
+expression           : 8 11 14 15 21 22
+factor               : 16 17 18
+main_declaration     : 2
+object_declaration   : 1
+println_statement    : 9
 program              : 0
-statement            : 2 3
-statements           : 1 3 10 11
-while_loop           : 8
+statement            : 6 7
+statements           : 3 5 7
+term                 : 13 14 15 17 18
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . program
-    (1) program -> . statements
-    (2) statements -> . statement
-    (3) statements -> . statements statement
-    (4) statement -> . expression SEMICOLON
-    (5) statement -> . for_loop
-    (6) statement -> . println_statement
-    (7) statement -> . nombre_assignment
-    (8) statement -> . while_loop
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
-    (11) for_loop -> . FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (12) println_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
-    (9) nombre_assignment -> . NOMBRE EQUALS KEVIN
-    (10) while_loop -> . WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
+    (1) program -> . object_declaration
+    (2) object_declaration -> . OBJECT ID LBRACE main_declaration RBRACE
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
-    FOR             shift and go to state 14
-    PRINT           shift and go to state 15
-    NOMBRE          shift and go to state 16
-    WHILE           shift and go to state 17
+    OBJECT          shift and go to state 3
 
     program                        shift and go to state 1
-    statements                     shift and go to state 2
-    statement                      shift and go to state 3
-    expression                     shift and go to state 4
-    for_loop                       shift and go to state 5
-    println_statement              shift and go to state 6
-    nombre_assignment              shift and go to state 7
-    while_loop                     shift and go to state 8
+    object_declaration             shift and go to state 2
 
 state 1
 
@@ -164,1828 +107,669 @@ state 1
 
 state 2
 
-    (1) program -> statements .
-    (3) statements -> statements . statement
-    (4) statement -> . expression SEMICOLON
-    (5) statement -> . for_loop
-    (6) statement -> . println_statement
-    (7) statement -> . nombre_assignment
-    (8) statement -> . while_loop
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
-    (11) for_loop -> . FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (12) println_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
-    (9) nombre_assignment -> . NOMBRE EQUALS KEVIN
-    (10) while_loop -> . WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
+    (1) program -> object_declaration .
 
-    $end            reduce using rule 1 (program -> statements .)
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
-    FOR             shift and go to state 14
-    PRINT           shift and go to state 15
-    NOMBRE          shift and go to state 16
-    WHILE           shift and go to state 17
+    $end            reduce using rule 1 (program -> object_declaration .)
 
-    statement                      shift and go to state 18
-    expression                     shift and go to state 4
-    for_loop                       shift and go to state 5
-    println_statement              shift and go to state 6
-    nombre_assignment              shift and go to state 7
-    while_loop                     shift and go to state 8
 
 state 3
 
-    (2) statements -> statement .
+    (2) object_declaration -> OBJECT . ID LBRACE main_declaration RBRACE
 
-    LPAREN          reduce using rule 2 (statements -> statement .)
-    ID              reduce using rule 2 (statements -> statement .)
-    NUMBER          reduce using rule 2 (statements -> statement .)
-    INCREMENT       reduce using rule 2 (statements -> statement .)
-    STRING          reduce using rule 2 (statements -> statement .)
-    FOR             reduce using rule 2 (statements -> statement .)
-    PRINT           reduce using rule 2 (statements -> statement .)
-    NOMBRE          reduce using rule 2 (statements -> statement .)
-    WHILE           reduce using rule 2 (statements -> statement .)
-    $end            reduce using rule 2 (statements -> statement .)
-    RIGHT_BRACE     reduce using rule 2 (statements -> statement .)
+    ID              shift and go to state 4
 
 
 state 4
 
-    (4) statement -> expression . SEMICOLON
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (2) object_declaration -> OBJECT ID . LBRACE main_declaration RBRACE
 
-    SEMICOLON       shift and go to state 19
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    LBRACE          shift and go to state 5
 
 
 state 5
 
-    (5) statement -> for_loop .
+    (2) object_declaration -> OBJECT ID LBRACE . main_declaration RBRACE
+    (3) main_declaration -> . DEF MAIN LPAREN args LBRACE statements RBRACE
 
-    LPAREN          reduce using rule 5 (statement -> for_loop .)
-    ID              reduce using rule 5 (statement -> for_loop .)
-    NUMBER          reduce using rule 5 (statement -> for_loop .)
-    INCREMENT       reduce using rule 5 (statement -> for_loop .)
-    STRING          reduce using rule 5 (statement -> for_loop .)
-    FOR             reduce using rule 5 (statement -> for_loop .)
-    PRINT           reduce using rule 5 (statement -> for_loop .)
-    NOMBRE          reduce using rule 5 (statement -> for_loop .)
-    WHILE           reduce using rule 5 (statement -> for_loop .)
-    $end            reduce using rule 5 (statement -> for_loop .)
-    RIGHT_BRACE     reduce using rule 5 (statement -> for_loop .)
+    DEF             shift and go to state 7
 
+    main_declaration               shift and go to state 6
 
 state 6
 
-    (6) statement -> println_statement .
+    (2) object_declaration -> OBJECT ID LBRACE main_declaration . RBRACE
 
-    LPAREN          reduce using rule 6 (statement -> println_statement .)
-    ID              reduce using rule 6 (statement -> println_statement .)
-    NUMBER          reduce using rule 6 (statement -> println_statement .)
-    INCREMENT       reduce using rule 6 (statement -> println_statement .)
-    STRING          reduce using rule 6 (statement -> println_statement .)
-    FOR             reduce using rule 6 (statement -> println_statement .)
-    PRINT           reduce using rule 6 (statement -> println_statement .)
-    NOMBRE          reduce using rule 6 (statement -> println_statement .)
-    WHILE           reduce using rule 6 (statement -> println_statement .)
-    $end            reduce using rule 6 (statement -> println_statement .)
-    RIGHT_BRACE     reduce using rule 6 (statement -> println_statement .)
+    RBRACE          shift and go to state 8
 
 
 state 7
 
-    (7) statement -> nombre_assignment .
+    (3) main_declaration -> DEF . MAIN LPAREN args LBRACE statements RBRACE
 
-    LPAREN          reduce using rule 7 (statement -> nombre_assignment .)
-    ID              reduce using rule 7 (statement -> nombre_assignment .)
-    NUMBER          reduce using rule 7 (statement -> nombre_assignment .)
-    INCREMENT       reduce using rule 7 (statement -> nombre_assignment .)
-    STRING          reduce using rule 7 (statement -> nombre_assignment .)
-    FOR             reduce using rule 7 (statement -> nombre_assignment .)
-    PRINT           reduce using rule 7 (statement -> nombre_assignment .)
-    NOMBRE          reduce using rule 7 (statement -> nombre_assignment .)
-    WHILE           reduce using rule 7 (statement -> nombre_assignment .)
-    $end            reduce using rule 7 (statement -> nombre_assignment .)
-    RIGHT_BRACE     reduce using rule 7 (statement -> nombre_assignment .)
+    MAIN            shift and go to state 9
 
 
 state 8
 
-    (8) statement -> while_loop .
+    (2) object_declaration -> OBJECT ID LBRACE main_declaration RBRACE .
 
-    LPAREN          reduce using rule 8 (statement -> while_loop .)
-    ID              reduce using rule 8 (statement -> while_loop .)
-    NUMBER          reduce using rule 8 (statement -> while_loop .)
-    INCREMENT       reduce using rule 8 (statement -> while_loop .)
-    STRING          reduce using rule 8 (statement -> while_loop .)
-    FOR             reduce using rule 8 (statement -> while_loop .)
-    PRINT           reduce using rule 8 (statement -> while_loop .)
-    NOMBRE          reduce using rule 8 (statement -> while_loop .)
-    WHILE           reduce using rule 8 (statement -> while_loop .)
-    $end            reduce using rule 8 (statement -> while_loop .)
-    RIGHT_BRACE     reduce using rule 8 (statement -> while_loop .)
+    $end            reduce using rule 2 (object_declaration -> OBJECT ID LBRACE main_declaration RBRACE .)
 
 
 state 9
 
-    (20) expression -> LPAREN . expression RPAREN
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (3) main_declaration -> DEF MAIN . LPAREN args LBRACE statements RBRACE
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    LPAREN          shift and go to state 10
 
-    expression                     shift and go to state 30
 
 state 10
 
-    (21) expression -> ID .
+    (3) main_declaration -> DEF MAIN LPAREN . args LBRACE statements RBRACE
+    (4) args -> . ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
 
-    SEMICOLON       reduce using rule 21 (expression -> ID .)
-    PLUS            reduce using rule 21 (expression -> ID .)
-    MINUS           reduce using rule 21 (expression -> ID .)
-    TIMES           reduce using rule 21 (expression -> ID .)
-    DIVIDE          reduce using rule 21 (expression -> ID .)
-    LESS_THAN       reduce using rule 21 (expression -> ID .)
-    GREATER_THAN    reduce using rule 21 (expression -> ID .)
-    LESS_THAN_EQUAL reduce using rule 21 (expression -> ID .)
-    GREATER_THAN_EQUAL reduce using rule 21 (expression -> ID .)
-    EQUAL_EQUAL     reduce using rule 21 (expression -> ID .)
-    NOT_EQUAL       reduce using rule 21 (expression -> ID .)
-    RPAREN          reduce using rule 21 (expression -> ID .)
+    ARGS            shift and go to state 12
 
+    args                           shift and go to state 11
 
 state 11
 
-    (22) expression -> NUMBER .
+    (3) main_declaration -> DEF MAIN LPAREN args . LBRACE statements RBRACE
 
-    SEMICOLON       reduce using rule 22 (expression -> NUMBER .)
-    PLUS            reduce using rule 22 (expression -> NUMBER .)
-    MINUS           reduce using rule 22 (expression -> NUMBER .)
-    TIMES           reduce using rule 22 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 22 (expression -> NUMBER .)
-    LESS_THAN       reduce using rule 22 (expression -> NUMBER .)
-    GREATER_THAN    reduce using rule 22 (expression -> NUMBER .)
-    LESS_THAN_EQUAL reduce using rule 22 (expression -> NUMBER .)
-    GREATER_THAN_EQUAL reduce using rule 22 (expression -> NUMBER .)
-    EQUAL_EQUAL     reduce using rule 22 (expression -> NUMBER .)
-    NOT_EQUAL       reduce using rule 22 (expression -> NUMBER .)
-    RPAREN          reduce using rule 22 (expression -> NUMBER .)
+    LBRACE          shift and go to state 13
 
 
 state 12
 
-    (23) expression -> INCREMENT .
+    (4) args -> ARGS . COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
 
-    SEMICOLON       reduce using rule 23 (expression -> INCREMENT .)
-    PLUS            reduce using rule 23 (expression -> INCREMENT .)
-    MINUS           reduce using rule 23 (expression -> INCREMENT .)
-    TIMES           reduce using rule 23 (expression -> INCREMENT .)
-    DIVIDE          reduce using rule 23 (expression -> INCREMENT .)
-    LESS_THAN       reduce using rule 23 (expression -> INCREMENT .)
-    GREATER_THAN    reduce using rule 23 (expression -> INCREMENT .)
-    LESS_THAN_EQUAL reduce using rule 23 (expression -> INCREMENT .)
-    GREATER_THAN_EQUAL reduce using rule 23 (expression -> INCREMENT .)
-    EQUAL_EQUAL     reduce using rule 23 (expression -> INCREMENT .)
-    NOT_EQUAL       reduce using rule 23 (expression -> INCREMENT .)
-    RPAREN          reduce using rule 23 (expression -> INCREMENT .)
+    COLON           shift and go to state 14
 
 
 state 13
 
-    (24) expression -> STRING .
+    (3) main_declaration -> DEF MAIN LPAREN args LBRACE . statements RBRACE
+    (6) statements -> . statement
+    (7) statements -> . statements statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . println_statement
+    (10) statement -> . assignment
+    (13) expression -> . term
+    (14) expression -> . expression PLUS term
+    (15) expression -> . expression MINUS term
+    (11) println_statement -> . PRINTLN LPAREN expression RPAREN SEMICOLON
+    (12) println_statement -> . PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON
+    (22) assignment -> . ID EQUALS expression
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-    SEMICOLON       reduce using rule 24 (expression -> STRING .)
-    PLUS            reduce using rule 24 (expression -> STRING .)
-    MINUS           reduce using rule 24 (expression -> STRING .)
-    TIMES           reduce using rule 24 (expression -> STRING .)
-    DIVIDE          reduce using rule 24 (expression -> STRING .)
-    LESS_THAN       reduce using rule 24 (expression -> STRING .)
-    GREATER_THAN    reduce using rule 24 (expression -> STRING .)
-    LESS_THAN_EQUAL reduce using rule 24 (expression -> STRING .)
-    GREATER_THAN_EQUAL reduce using rule 24 (expression -> STRING .)
-    EQUAL_EQUAL     reduce using rule 24 (expression -> STRING .)
-    NOT_EQUAL       reduce using rule 24 (expression -> STRING .)
-    RPAREN          reduce using rule 24 (expression -> STRING .)
+    PRINTLN         shift and go to state 22
+    ID              shift and go to state 23
+    NUMBER          shift and go to state 25
+    LPAREN          shift and go to state 15
 
+    statements                     shift and go to state 16
+    statement                      shift and go to state 17
+    expression                     shift and go to state 18
+    println_statement              shift and go to state 19
+    assignment                     shift and go to state 20
+    term                           shift and go to state 21
+    factor                         shift and go to state 24
 
 state 14
 
-    (11) for_loop -> FOR . LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
+    (4) args -> ARGS COLON . ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
 
-    LPAREN          shift and go to state 31
+    ARRAY           shift and go to state 26
 
 
 state 15
 
-    (12) println_statement -> PRINT . LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> PRINT . LPAREN STRING RPAREN SEMICOLON
+    (21) factor -> LPAREN . expression RPAREN
+    (13) expression -> . term
+    (14) expression -> . expression PLUS term
+    (15) expression -> . expression MINUS term
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-    LPAREN          shift and go to state 32
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
+    expression                     shift and go to state 27
+    term                           shift and go to state 21
+    factor                         shift and go to state 24
 
 state 16
 
-    (9) nombre_assignment -> NOMBRE . EQUALS KEVIN
+    (3) main_declaration -> DEF MAIN LPAREN args LBRACE statements . RBRACE
+    (7) statements -> statements . statement
+    (8) statement -> . expression SEMICOLON
+    (9) statement -> . println_statement
+    (10) statement -> . assignment
+    (13) expression -> . term
+    (14) expression -> . expression PLUS term
+    (15) expression -> . expression MINUS term
+    (11) println_statement -> . PRINTLN LPAREN expression RPAREN SEMICOLON
+    (12) println_statement -> . PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON
+    (22) assignment -> . ID EQUALS expression
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-    EQUALS          shift and go to state 33
+    RBRACE          shift and go to state 29
+    PRINTLN         shift and go to state 22
+    ID              shift and go to state 23
+    NUMBER          shift and go to state 25
+    LPAREN          shift and go to state 15
 
+    statement                      shift and go to state 30
+    expression                     shift and go to state 18
+    println_statement              shift and go to state 19
+    assignment                     shift and go to state 20
+    term                           shift and go to state 21
+    factor                         shift and go to state 24
 
 state 17
 
-    (10) while_loop -> WHILE . LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
+    (6) statements -> statement .
 
-    LPAREN          shift and go to state 34
+    RBRACE          reduce using rule 6 (statements -> statement .)
+    PRINTLN         reduce using rule 6 (statements -> statement .)
+    ID              reduce using rule 6 (statements -> statement .)
+    NUMBER          reduce using rule 6 (statements -> statement .)
+    LPAREN          reduce using rule 6 (statements -> statement .)
 
 
 state 18
 
-    (3) statements -> statements statement .
+    (8) statement -> expression . SEMICOLON
+    (14) expression -> expression . PLUS term
+    (15) expression -> expression . MINUS term
 
-    LPAREN          reduce using rule 3 (statements -> statements statement .)
-    ID              reduce using rule 3 (statements -> statements statement .)
-    NUMBER          reduce using rule 3 (statements -> statements statement .)
-    INCREMENT       reduce using rule 3 (statements -> statements statement .)
-    STRING          reduce using rule 3 (statements -> statements statement .)
-    FOR             reduce using rule 3 (statements -> statements statement .)
-    PRINT           reduce using rule 3 (statements -> statements statement .)
-    NOMBRE          reduce using rule 3 (statements -> statements statement .)
-    WHILE           reduce using rule 3 (statements -> statements statement .)
-    $end            reduce using rule 3 (statements -> statements statement .)
-    RIGHT_BRACE     reduce using rule 3 (statements -> statements statement .)
+    SEMICOLON       shift and go to state 31
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 33
 
 
 state 19
 
-    (4) statement -> expression SEMICOLON .
+    (9) statement -> println_statement .
 
-    LPAREN          reduce using rule 4 (statement -> expression SEMICOLON .)
-    ID              reduce using rule 4 (statement -> expression SEMICOLON .)
-    NUMBER          reduce using rule 4 (statement -> expression SEMICOLON .)
-    INCREMENT       reduce using rule 4 (statement -> expression SEMICOLON .)
-    STRING          reduce using rule 4 (statement -> expression SEMICOLON .)
-    FOR             reduce using rule 4 (statement -> expression SEMICOLON .)
-    PRINT           reduce using rule 4 (statement -> expression SEMICOLON .)
-    NOMBRE          reduce using rule 4 (statement -> expression SEMICOLON .)
-    WHILE           reduce using rule 4 (statement -> expression SEMICOLON .)
-    $end            reduce using rule 4 (statement -> expression SEMICOLON .)
-    RIGHT_BRACE     reduce using rule 4 (statement -> expression SEMICOLON .)
+    RBRACE          reduce using rule 9 (statement -> println_statement .)
+    PRINTLN         reduce using rule 9 (statement -> println_statement .)
+    ID              reduce using rule 9 (statement -> println_statement .)
+    NUMBER          reduce using rule 9 (statement -> println_statement .)
+    LPAREN          reduce using rule 9 (statement -> println_statement .)
 
 
 state 20
 
-    (16) expression -> expression PLUS . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (10) statement -> assignment .
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    RBRACE          reduce using rule 10 (statement -> assignment .)
+    PRINTLN         reduce using rule 10 (statement -> assignment .)
+    ID              reduce using rule 10 (statement -> assignment .)
+    NUMBER          reduce using rule 10 (statement -> assignment .)
+    LPAREN          reduce using rule 10 (statement -> assignment .)
 
-    expression                     shift and go to state 35
 
 state 21
 
-    (17) expression -> expression MINUS . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (13) expression -> term .
+    (17) term -> term . TIMES factor
+    (18) term -> term . DIVIDE factor
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    SEMICOLON       reduce using rule 13 (expression -> term .)
+    PLUS            reduce using rule 13 (expression -> term .)
+    MINUS           reduce using rule 13 (expression -> term .)
+    RPAREN          reduce using rule 13 (expression -> term .)
+    RBRACE          reduce using rule 13 (expression -> term .)
+    PRINTLN         reduce using rule 13 (expression -> term .)
+    ID              reduce using rule 13 (expression -> term .)
+    NUMBER          reduce using rule 13 (expression -> term .)
+    LPAREN          reduce using rule 13 (expression -> term .)
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
 
-    expression                     shift and go to state 36
 
 state 22
 
-    (18) expression -> expression TIMES . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (11) println_statement -> PRINTLN . LPAREN expression RPAREN SEMICOLON
+    (12) println_statement -> PRINTLN . LPAREN STRING_LITERAL RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    LPAREN          shift and go to state 36
 
-    expression                     shift and go to state 37
 
 state 23
 
-    (19) expression -> expression DIVIDE . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (22) assignment -> ID . EQUALS expression
+    (20) factor -> ID .
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    EQUALS          shift and go to state 37
+    TIMES           reduce using rule 20 (factor -> ID .)
+    DIVIDE          reduce using rule 20 (factor -> ID .)
+    SEMICOLON       reduce using rule 20 (factor -> ID .)
+    PLUS            reduce using rule 20 (factor -> ID .)
+    MINUS           reduce using rule 20 (factor -> ID .)
 
-    expression                     shift and go to state 38
 
 state 24
 
-    (25) expression -> expression LESS_THAN . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (16) term -> factor .
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    TIMES           reduce using rule 16 (term -> factor .)
+    DIVIDE          reduce using rule 16 (term -> factor .)
+    SEMICOLON       reduce using rule 16 (term -> factor .)
+    PLUS            reduce using rule 16 (term -> factor .)
+    MINUS           reduce using rule 16 (term -> factor .)
+    RPAREN          reduce using rule 16 (term -> factor .)
+    RBRACE          reduce using rule 16 (term -> factor .)
+    PRINTLN         reduce using rule 16 (term -> factor .)
+    ID              reduce using rule 16 (term -> factor .)
+    NUMBER          reduce using rule 16 (term -> factor .)
+    LPAREN          reduce using rule 16 (term -> factor .)
 
-    expression                     shift and go to state 39
 
 state 25
 
-    (26) expression -> expression GREATER_THAN . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (19) factor -> NUMBER .
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    TIMES           reduce using rule 19 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 19 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 19 (factor -> NUMBER .)
+    PLUS            reduce using rule 19 (factor -> NUMBER .)
+    MINUS           reduce using rule 19 (factor -> NUMBER .)
+    RPAREN          reduce using rule 19 (factor -> NUMBER .)
+    RBRACE          reduce using rule 19 (factor -> NUMBER .)
+    PRINTLN         reduce using rule 19 (factor -> NUMBER .)
+    ID              reduce using rule 19 (factor -> NUMBER .)
+    NUMBER          reduce using rule 19 (factor -> NUMBER .)
+    LPAREN          reduce using rule 19 (factor -> NUMBER .)
 
-    expression                     shift and go to state 40
 
 state 26
 
-    (27) expression -> expression LESS_THAN_EQUAL . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (4) args -> ARGS COLON ARRAY . LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    LEFT_BRACKET    shift and go to state 38
 
-    expression                     shift and go to state 41
 
 state 27
 
-    (28) expression -> expression GREATER_THAN_EQUAL . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (21) factor -> LPAREN expression . RPAREN
+    (14) expression -> expression . PLUS term
+    (15) expression -> expression . MINUS term
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    RPAREN          shift and go to state 39
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 33
 
-    expression                     shift and go to state 42
 
 state 28
 
-    (29) expression -> expression EQUAL_EQUAL . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (20) factor -> ID .
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    TIMES           reduce using rule 20 (factor -> ID .)
+    DIVIDE          reduce using rule 20 (factor -> ID .)
+    RPAREN          reduce using rule 20 (factor -> ID .)
+    PLUS            reduce using rule 20 (factor -> ID .)
+    MINUS           reduce using rule 20 (factor -> ID .)
+    SEMICOLON       reduce using rule 20 (factor -> ID .)
+    RBRACE          reduce using rule 20 (factor -> ID .)
+    PRINTLN         reduce using rule 20 (factor -> ID .)
+    ID              reduce using rule 20 (factor -> ID .)
+    NUMBER          reduce using rule 20 (factor -> ID .)
+    LPAREN          reduce using rule 20 (factor -> ID .)
 
-    expression                     shift and go to state 43
 
 state 29
 
-    (30) expression -> expression NOT_EQUAL . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (3) main_declaration -> DEF MAIN LPAREN args LBRACE statements RBRACE .
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    RBRACE          reduce using rule 3 (main_declaration -> DEF MAIN LPAREN args LBRACE statements RBRACE .)
 
-    expression                     shift and go to state 44
 
 state 30
 
-    (20) expression -> LPAREN expression . RPAREN
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (7) statements -> statements statement .
 
-    RPAREN          shift and go to state 45
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    RBRACE          reduce using rule 7 (statements -> statements statement .)
+    PRINTLN         reduce using rule 7 (statements -> statements statement .)
+    ID              reduce using rule 7 (statements -> statements statement .)
+    NUMBER          reduce using rule 7 (statements -> statements statement .)
+    LPAREN          reduce using rule 7 (statements -> statements statement .)
 
 
 state 31
 
-    (11) for_loop -> FOR LPAREN . assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (14) assignment -> . ID EQUALS expression
+    (8) statement -> expression SEMICOLON .
 
-    ID              shift and go to state 47
+    RBRACE          reduce using rule 8 (statement -> expression SEMICOLON .)
+    PRINTLN         reduce using rule 8 (statement -> expression SEMICOLON .)
+    ID              reduce using rule 8 (statement -> expression SEMICOLON .)
+    NUMBER          reduce using rule 8 (statement -> expression SEMICOLON .)
+    LPAREN          reduce using rule 8 (statement -> expression SEMICOLON .)
 
-    assignment                     shift and go to state 46
 
 state 32
 
-    (12) println_statement -> PRINT LPAREN . expression RPAREN SEMICOLON
-    (13) println_statement -> PRINT LPAREN . STRING RPAREN SEMICOLON
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (14) expression -> expression PLUS . term
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-    STRING          shift and go to state 49
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
-    expression                     shift and go to state 48
+    term                           shift and go to state 40
+    factor                         shift and go to state 24
 
 state 33
 
-    (9) nombre_assignment -> NOMBRE EQUALS . KEVIN
+    (15) expression -> expression MINUS . term
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-    KEVIN           shift and go to state 50
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
+    term                           shift and go to state 41
+    factor                         shift and go to state 24
 
 state 34
 
-    (10) while_loop -> WHILE LPAREN . condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (15) condition -> . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (17) term -> term TIMES . factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
-    condition                      shift and go to state 51
-    expression                     shift and go to state 52
+    factor                         shift and go to state 42
 
 state 35
 
-    (16) expression -> expression PLUS expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (18) term -> term DIVIDE . factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 16 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 16 (expression -> expression PLUS expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
-  ! PLUS            [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! MINUS           [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! TIMES           [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! LESS_THAN       [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! GREATER_THAN    [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 16 (expression -> expression PLUS expression .) ]
-
+    factor                         shift and go to state 43
 
 state 36
 
-    (17) expression -> expression MINUS expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (11) println_statement -> PRINTLN LPAREN . expression RPAREN SEMICOLON
+    (12) println_statement -> PRINTLN LPAREN . STRING_LITERAL RPAREN SEMICOLON
+    (13) expression -> . term
+    (14) expression -> . expression PLUS term
+    (15) expression -> . expression MINUS term
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 17 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 17 (expression -> expression MINUS expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    STRING_LITERAL  shift and go to state 45
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
-  ! PLUS            [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! MINUS           [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! TIMES           [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! LESS_THAN       [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! GREATER_THAN    [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 17 (expression -> expression MINUS expression .) ]
-
+    expression                     shift and go to state 44
+    term                           shift and go to state 21
+    factor                         shift and go to state 24
 
 state 37
 
-    (18) expression -> expression TIMES expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (22) assignment -> ID EQUALS . expression
+    (13) expression -> . term
+    (14) expression -> . expression PLUS term
+    (15) expression -> . expression MINUS term
+    (16) term -> . factor
+    (17) term -> . term TIMES factor
+    (18) term -> . term DIVIDE factor
+    (19) factor -> . NUMBER
+    (20) factor -> . ID
+    (21) factor -> . LPAREN expression RPAREN
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 18 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 18 (expression -> expression TIMES expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    NUMBER          shift and go to state 25
+    ID              shift and go to state 28
+    LPAREN          shift and go to state 15
 
-  ! PLUS            [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! MINUS           [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! TIMES           [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! DIVIDE          [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! LESS_THAN       [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! GREATER_THAN    [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 18 (expression -> expression TIMES expression .) ]
-
+    expression                     shift and go to state 46
+    term                           shift and go to state 21
+    factor                         shift and go to state 24
 
 state 38
 
-    (19) expression -> expression DIVIDE expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET . STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 19 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 19 (expression -> expression DIVIDE expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! MINUS           [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! TIMES           [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! DIVIDE          [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! LESS_THAN       [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! GREATER_THAN    [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 19 (expression -> expression DIVIDE expression .) ]
+    STRING_TYPE     shift and go to state 47
 
 
 state 39
 
-    (25) expression -> expression LESS_THAN expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (21) factor -> LPAREN expression RPAREN .
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 25 (expression -> expression LESS_THAN expression .)
-    RPAREN          reduce using rule 25 (expression -> expression LESS_THAN expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! MINUS           [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! TIMES           [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! DIVIDE          [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! LESS_THAN       [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! GREATER_THAN    [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 25 (expression -> expression LESS_THAN expression .) ]
+    TIMES           reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    PRINTLN         reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    ID              reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    NUMBER          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    LPAREN          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
 
 
 state 40
 
-    (26) expression -> expression GREATER_THAN expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (14) expression -> expression PLUS term .
+    (17) term -> term . TIMES factor
+    (18) term -> term . DIVIDE factor
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 26 (expression -> expression GREATER_THAN expression .)
-    RPAREN          reduce using rule 26 (expression -> expression GREATER_THAN expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! MINUS           [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! TIMES           [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! DIVIDE          [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! LESS_THAN       [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! GREATER_THAN    [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 26 (expression -> expression GREATER_THAN expression .) ]
+    SEMICOLON       reduce using rule 14 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 14 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 14 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 14 (expression -> expression PLUS term .)
+    RBRACE          reduce using rule 14 (expression -> expression PLUS term .)
+    PRINTLN         reduce using rule 14 (expression -> expression PLUS term .)
+    ID              reduce using rule 14 (expression -> expression PLUS term .)
+    NUMBER          reduce using rule 14 (expression -> expression PLUS term .)
+    LPAREN          reduce using rule 14 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
 
 
 state 41
 
-    (27) expression -> expression LESS_THAN_EQUAL expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (15) expression -> expression MINUS term .
+    (17) term -> term . TIMES factor
+    (18) term -> term . DIVIDE factor
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .)
-    RPAREN          reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! MINUS           [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! TIMES           [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! DIVIDE          [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! LESS_THAN       [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! GREATER_THAN    [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 27 (expression -> expression LESS_THAN_EQUAL expression .) ]
+    SEMICOLON       reduce using rule 15 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 15 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 15 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 15 (expression -> expression MINUS term .)
+    RBRACE          reduce using rule 15 (expression -> expression MINUS term .)
+    PRINTLN         reduce using rule 15 (expression -> expression MINUS term .)
+    ID              reduce using rule 15 (expression -> expression MINUS term .)
+    NUMBER          reduce using rule 15 (expression -> expression MINUS term .)
+    LPAREN          reduce using rule 15 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 34
+    DIVIDE          shift and go to state 35
 
 
 state 42
 
-    (28) expression -> expression GREATER_THAN_EQUAL expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (17) term -> term TIMES factor .
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .)
-    RPAREN          reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! MINUS           [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! TIMES           [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! DIVIDE          [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! LESS_THAN       [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! GREATER_THAN    [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 28 (expression -> expression GREATER_THAN_EQUAL expression .) ]
+    TIMES           reduce using rule 17 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 17 (term -> term TIMES factor .)
+    SEMICOLON       reduce using rule 17 (term -> term TIMES factor .)
+    PLUS            reduce using rule 17 (term -> term TIMES factor .)
+    MINUS           reduce using rule 17 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 17 (term -> term TIMES factor .)
+    RBRACE          reduce using rule 17 (term -> term TIMES factor .)
+    PRINTLN         reduce using rule 17 (term -> term TIMES factor .)
+    ID              reduce using rule 17 (term -> term TIMES factor .)
+    NUMBER          reduce using rule 17 (term -> term TIMES factor .)
+    LPAREN          reduce using rule 17 (term -> term TIMES factor .)
 
 
 state 43
 
-    (29) expression -> expression EQUAL_EQUAL expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (18) term -> term DIVIDE factor .
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .)
-    RPAREN          reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! MINUS           [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! TIMES           [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! DIVIDE          [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! LESS_THAN       [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! GREATER_THAN    [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 29 (expression -> expression EQUAL_EQUAL expression .) ]
+    TIMES           reduce using rule 18 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 18 (term -> term DIVIDE factor .)
+    SEMICOLON       reduce using rule 18 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 18 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 18 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 18 (term -> term DIVIDE factor .)
+    RBRACE          reduce using rule 18 (term -> term DIVIDE factor .)
+    PRINTLN         reduce using rule 18 (term -> term DIVIDE factor .)
+    ID              reduce using rule 18 (term -> term DIVIDE factor .)
+    NUMBER          reduce using rule 18 (term -> term DIVIDE factor .)
+    LPAREN          reduce using rule 18 (term -> term DIVIDE factor .)
 
 
 state 44
 
-    (30) expression -> expression NOT_EQUAL expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (11) println_statement -> PRINTLN LPAREN expression . RPAREN SEMICOLON
+    (14) expression -> expression . PLUS term
+    (15) expression -> expression . MINUS term
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_EQUAL resolved as shift
-  ! shift/reduce conflict for EQUAL_EQUAL resolved as shift
-  ! shift/reduce conflict for NOT_EQUAL resolved as shift
-    SEMICOLON       reduce using rule 30 (expression -> expression NOT_EQUAL expression .)
-    RPAREN          reduce using rule 30 (expression -> expression NOT_EQUAL expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-  ! PLUS            [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! MINUS           [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! TIMES           [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! DIVIDE          [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! LESS_THAN       [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! GREATER_THAN    [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! LESS_THAN_EQUAL [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! GREATER_THAN_EQUAL [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! EQUAL_EQUAL     [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 30 (expression -> expression NOT_EQUAL expression .) ]
+    RPAREN          shift and go to state 48
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 33
 
 
 state 45
 
-    (20) expression -> LPAREN expression RPAREN .
+    (12) println_statement -> PRINTLN LPAREN STRING_LITERAL . RPAREN SEMICOLON
 
-    SEMICOLON       reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    LESS_THAN       reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    GREATER_THAN    reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    LESS_THAN_EQUAL reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    GREATER_THAN_EQUAL reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    EQUAL_EQUAL     reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    NOT_EQUAL       reduce using rule 20 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 20 (expression -> LPAREN expression RPAREN .)
+    RPAREN          shift and go to state 49
 
 
 state 46
 
-    (11) for_loop -> FOR LPAREN assignment . SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
+    (22) assignment -> ID EQUALS expression .
+    (14) expression -> expression . PLUS term
+    (15) expression -> expression . MINUS term
 
-    SEMICOLON       shift and go to state 53
+    RBRACE          reduce using rule 22 (assignment -> ID EQUALS expression .)
+    PRINTLN         reduce using rule 22 (assignment -> ID EQUALS expression .)
+    ID              reduce using rule 22 (assignment -> ID EQUALS expression .)
+    NUMBER          reduce using rule 22 (assignment -> ID EQUALS expression .)
+    LPAREN          reduce using rule 22 (assignment -> ID EQUALS expression .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 33
 
 
 state 47
 
-    (14) assignment -> ID . EQUALS expression
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE . RIGHT_BRACKET RPAREN COLON UNIT EQUALS
 
-    EQUALS          shift and go to state 54
+    RIGHT_BRACKET   shift and go to state 50
 
 
 state 48
 
-    (12) println_statement -> PRINT LPAREN expression . RPAREN SEMICOLON
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (11) println_statement -> PRINTLN LPAREN expression RPAREN . SEMICOLON
 
-    RPAREN          shift and go to state 55
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    SEMICOLON       shift and go to state 51
 
 
 state 49
 
-    (13) println_statement -> PRINT LPAREN STRING . RPAREN SEMICOLON
-    (24) expression -> STRING .
+    (12) println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN . SEMICOLON
 
-  ! shift/reduce conflict for RPAREN resolved as shift
-    RPAREN          shift and go to state 56
-    PLUS            reduce using rule 24 (expression -> STRING .)
-    MINUS           reduce using rule 24 (expression -> STRING .)
-    TIMES           reduce using rule 24 (expression -> STRING .)
-    DIVIDE          reduce using rule 24 (expression -> STRING .)
-    LESS_THAN       reduce using rule 24 (expression -> STRING .)
-    GREATER_THAN    reduce using rule 24 (expression -> STRING .)
-    LESS_THAN_EQUAL reduce using rule 24 (expression -> STRING .)
-    GREATER_THAN_EQUAL reduce using rule 24 (expression -> STRING .)
-    EQUAL_EQUAL     reduce using rule 24 (expression -> STRING .)
-    NOT_EQUAL       reduce using rule 24 (expression -> STRING .)
-
-  ! RPAREN          [ reduce using rule 24 (expression -> STRING .) ]
+    SEMICOLON       shift and go to state 52
 
 
 state 50
 
-    (9) nombre_assignment -> NOMBRE EQUALS KEVIN .
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET . RPAREN COLON UNIT EQUALS
 
-    LPAREN          reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    ID              reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    NUMBER          reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    INCREMENT       reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    STRING          reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    FOR             reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    PRINT           reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    NOMBRE          reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    WHILE           reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    $end            reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
-    RIGHT_BRACE     reduce using rule 9 (nombre_assignment -> NOMBRE EQUALS KEVIN .)
+    RPAREN          shift and go to state 53
 
 
 state 51
 
-    (10) while_loop -> WHILE LPAREN condition . RPAREN LEFT_BRACE statements RIGHT_BRACE
+    (11) println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON .
 
-    RPAREN          shift and go to state 57
+    RBRACE          reduce using rule 11 (println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON .)
+    PRINTLN         reduce using rule 11 (println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON .)
+    ID              reduce using rule 11 (println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON .)
+    NUMBER          reduce using rule 11 (println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON .)
+    LPAREN          reduce using rule 11 (println_statement -> PRINTLN LPAREN expression RPAREN SEMICOLON .)
 
 
 state 52
 
-    (15) condition -> expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
+    (12) println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON .
 
-    RPAREN          reduce using rule 15 (condition -> expression .)
-    SEMICOLON       reduce using rule 15 (condition -> expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
+    RBRACE          reduce using rule 12 (println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON .)
+    PRINTLN         reduce using rule 12 (println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON .)
+    ID              reduce using rule 12 (println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON .)
+    NUMBER          reduce using rule 12 (println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON .)
+    LPAREN          reduce using rule 12 (println_statement -> PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON .)
 
 
 state 53
 
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON . condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (15) condition -> . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN . COLON UNIT EQUALS
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    COLON           shift and go to state 54
 
-    condition                      shift and go to state 58
-    expression                     shift and go to state 52
 
 state 54
 
-    (14) assignment -> ID EQUALS . expression
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON . UNIT EQUALS
 
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
+    UNIT            shift and go to state 55
 
-    expression                     shift and go to state 59
 
 state 55
 
-    (12) println_statement -> PRINT LPAREN expression RPAREN . SEMICOLON
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT . EQUALS
 
-    SEMICOLON       shift and go to state 60
+    EQUALS          shift and go to state 56
 
 
 state 56
 
-    (13) println_statement -> PRINT LPAREN STRING RPAREN . SEMICOLON
+    (4) args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS .
 
-    SEMICOLON       shift and go to state 61
+    LBRACE          reduce using rule 4 (args -> ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS .)
 
-
-state 57
-
-    (10) while_loop -> WHILE LPAREN condition RPAREN . LEFT_BRACE statements RIGHT_BRACE
-
-    LEFT_BRACE      shift and go to state 62
-
-
-state 58
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition . SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-
-    SEMICOLON       shift and go to state 63
-
-
-state 59
-
-    (14) assignment -> ID EQUALS expression .
-    (16) expression -> expression . PLUS expression
-    (17) expression -> expression . MINUS expression
-    (18) expression -> expression . TIMES expression
-    (19) expression -> expression . DIVIDE expression
-    (25) expression -> expression . LESS_THAN expression
-    (26) expression -> expression . GREATER_THAN expression
-    (27) expression -> expression . LESS_THAN_EQUAL expression
-    (28) expression -> expression . GREATER_THAN_EQUAL expression
-    (29) expression -> expression . EQUAL_EQUAL expression
-    (30) expression -> expression . NOT_EQUAL expression
-
-    SEMICOLON       reduce using rule 14 (assignment -> ID EQUALS expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    LESS_THAN       shift and go to state 24
-    GREATER_THAN    shift and go to state 25
-    LESS_THAN_EQUAL shift and go to state 26
-    GREATER_THAN_EQUAL shift and go to state 27
-    EQUAL_EQUAL     shift and go to state 28
-    NOT_EQUAL       shift and go to state 29
-
-
-state 60
-
-    (12) println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .
-
-    LPAREN          reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    ID              reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    NUMBER          reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    INCREMENT       reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    STRING          reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    FOR             reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    PRINT           reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    NOMBRE          reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    WHILE           reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    $end            reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-    RIGHT_BRACE     reduce using rule 12 (println_statement -> PRINT LPAREN expression RPAREN SEMICOLON .)
-
-
-state 61
-
-    (13) println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .
-
-    LPAREN          reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    ID              reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    NUMBER          reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    INCREMENT       reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    STRING          reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    FOR             reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    PRINT           reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    NOMBRE          reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    WHILE           reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    $end            reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-    RIGHT_BRACE     reduce using rule 13 (println_statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
-
-
-state 62
-
-    (10) while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE . statements RIGHT_BRACE
-    (2) statements -> . statement
-    (3) statements -> . statements statement
-    (4) statement -> . expression SEMICOLON
-    (5) statement -> . for_loop
-    (6) statement -> . println_statement
-    (7) statement -> . nombre_assignment
-    (8) statement -> . while_loop
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
-    (11) for_loop -> . FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (12) println_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
-    (9) nombre_assignment -> . NOMBRE EQUALS KEVIN
-    (10) while_loop -> . WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
-    FOR             shift and go to state 14
-    PRINT           shift and go to state 15
-    NOMBRE          shift and go to state 16
-    WHILE           shift and go to state 17
-
-    statements                     shift and go to state 64
-    statement                      shift and go to state 3
-    expression                     shift and go to state 4
-    for_loop                       shift and go to state 5
-    println_statement              shift and go to state 6
-    nombre_assignment              shift and go to state 7
-    while_loop                     shift and go to state 8
-
-state 63
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON . increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (31) increment -> . ID INCREMENT
-
-    ID              shift and go to state 66
-
-    increment                      shift and go to state 65
-
-state 64
-
-    (10) while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements . RIGHT_BRACE
-    (3) statements -> statements . statement
-    (4) statement -> . expression SEMICOLON
-    (5) statement -> . for_loop
-    (6) statement -> . println_statement
-    (7) statement -> . nombre_assignment
-    (8) statement -> . while_loop
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
-    (11) for_loop -> . FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (12) println_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
-    (9) nombre_assignment -> . NOMBRE EQUALS KEVIN
-    (10) while_loop -> . WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-
-    RIGHT_BRACE     shift and go to state 67
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
-    FOR             shift and go to state 14
-    PRINT           shift and go to state 15
-    NOMBRE          shift and go to state 16
-    WHILE           shift and go to state 17
-
-    statement                      shift and go to state 18
-    expression                     shift and go to state 4
-    for_loop                       shift and go to state 5
-    println_statement              shift and go to state 6
-    nombre_assignment              shift and go to state 7
-    while_loop                     shift and go to state 8
-
-state 65
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment . RPAREN LEFT_BRACE statements RIGHT_BRACE
-
-    RPAREN          shift and go to state 68
-
-
-state 66
-
-    (31) increment -> ID . INCREMENT
-
-    INCREMENT       shift and go to state 69
-
-
-state 67
-
-    (10) while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .
-
-    LPAREN          reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    ID              reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    NUMBER          reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    INCREMENT       reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    STRING          reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    FOR             reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    PRINT           reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    NOMBRE          reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    WHILE           reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    $end            reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    RIGHT_BRACE     reduce using rule 10 (while_loop -> WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-
-
-state 68
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN . LEFT_BRACE statements RIGHT_BRACE
-
-    LEFT_BRACE      shift and go to state 70
-
-
-state 69
-
-    (31) increment -> ID INCREMENT .
-
-    RPAREN          reduce using rule 31 (increment -> ID INCREMENT .)
-
-
-state 70
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE . statements RIGHT_BRACE
-    (2) statements -> . statement
-    (3) statements -> . statements statement
-    (4) statement -> . expression SEMICOLON
-    (5) statement -> . for_loop
-    (6) statement -> . println_statement
-    (7) statement -> . nombre_assignment
-    (8) statement -> . while_loop
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
-    (11) for_loop -> . FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (12) println_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
-    (9) nombre_assignment -> . NOMBRE EQUALS KEVIN
-    (10) while_loop -> . WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
-    FOR             shift and go to state 14
-    PRINT           shift and go to state 15
-    NOMBRE          shift and go to state 16
-    WHILE           shift and go to state 17
-
-    statements                     shift and go to state 71
-    statement                      shift and go to state 3
-    expression                     shift and go to state 4
-    for_loop                       shift and go to state 5
-    println_statement              shift and go to state 6
-    nombre_assignment              shift and go to state 7
-    while_loop                     shift and go to state 8
-
-state 71
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements . RIGHT_BRACE
-    (3) statements -> statements . statement
-    (4) statement -> . expression SEMICOLON
-    (5) statement -> . for_loop
-    (6) statement -> . println_statement
-    (7) statement -> . nombre_assignment
-    (8) statement -> . while_loop
-    (16) expression -> . expression PLUS expression
-    (17) expression -> . expression MINUS expression
-    (18) expression -> . expression TIMES expression
-    (19) expression -> . expression DIVIDE expression
-    (20) expression -> . LPAREN expression RPAREN
-    (21) expression -> . ID
-    (22) expression -> . NUMBER
-    (23) expression -> . INCREMENT
-    (24) expression -> . STRING
-    (25) expression -> . expression LESS_THAN expression
-    (26) expression -> . expression GREATER_THAN expression
-    (27) expression -> . expression LESS_THAN_EQUAL expression
-    (28) expression -> . expression GREATER_THAN_EQUAL expression
-    (29) expression -> . expression EQUAL_EQUAL expression
-    (30) expression -> . expression NOT_EQUAL expression
-    (11) for_loop -> . FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    (12) println_statement -> . PRINT LPAREN expression RPAREN SEMICOLON
-    (13) println_statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
-    (9) nombre_assignment -> . NOMBRE EQUALS KEVIN
-    (10) while_loop -> . WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-
-    RIGHT_BRACE     shift and go to state 72
-    LPAREN          shift and go to state 9
-    ID              shift and go to state 10
-    NUMBER          shift and go to state 11
-    INCREMENT       shift and go to state 12
-    STRING          shift and go to state 13
-    FOR             shift and go to state 14
-    PRINT           shift and go to state 15
-    NOMBRE          shift and go to state 16
-    WHILE           shift and go to state 17
-
-    statement                      shift and go to state 18
-    expression                     shift and go to state 4
-    for_loop                       shift and go to state 5
-    println_statement              shift and go to state 6
-    nombre_assignment              shift and go to state 7
-    while_loop                     shift and go to state 8
-
-state 72
-
-    (11) for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .
-
-    LPAREN          reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    ID              reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    NUMBER          reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    INCREMENT       reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    STRING          reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    FOR             reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    PRINT           reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    NOMBRE          reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    WHILE           reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    $end            reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-    RIGHT_BRACE     reduce using rule 11 (for_loop -> FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 35 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 35 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 35 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 35 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 35 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 35 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 35 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 35 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 35 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 35 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 36 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 36 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 36 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 36 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 36 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 36 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 36 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 36 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 36 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 36 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 37 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 37 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 37 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 37 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 37 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 37 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 37 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 37 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 37 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 37 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 38 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 38 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 38 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 38 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 38 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 38 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 38 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 38 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 38 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 38 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 39 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 39 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 39 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 39 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 39 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 39 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 39 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 39 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 39 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 39 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 40 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 40 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 40 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 40 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 40 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 40 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 40 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 40 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 40 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 40 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 41 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 41 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 41 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 41 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 41 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 41 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 41 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 41 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 41 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 41 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 42 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 42 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 42 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 42 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 42 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 42 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 42 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 42 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 42 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 42 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 43 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 43 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 43 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 43 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 43 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 43 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 43 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 43 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 43 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 43 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 44 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 44 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 44 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 44 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 44 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 44 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_EQUAL in state 44 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_EQUAL in state 44 resolved as shift
-WARNING: shift/reduce conflict for EQUAL_EQUAL in state 44 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUAL in state 44 resolved as shift
-WARNING: shift/reduce conflict for RPAREN in state 49 resolved as shift

@@ -1,88 +1,93 @@
 import ply.yacc as yacc
-from analizador_lexico import tokens
+from analizador_lexico import tokens  # Asegúrate de que esto coincida con el nombre de tu archivo léxico
 
+# Definición de reglas sintácticas
 def p_program(p):
     '''
-    program : statements
+    program : object_declaration
     '''
-    p[0] = "Programa válido."
+    p[0] = "Programa Scala válido."
+
+def p_object_declaration(p):
+    '''
+    object_declaration : OBJECT ID LBRACE main_declaration RBRACE 
+    '''
+    p[0] = "Declaración de objeto válida."
+
+def p_main_declaration(p):
+    '''
+    main_declaration : DEF MAIN LPAREN args LBRACE statements RBRACE 
+    '''
+    p[0] = "Declaración del método main válida."
+
+
+def p_args(p):
+    '''
+    args : ARGS COLON ARRAY LEFT_BRACKET STRING_TYPE RIGHT_BRACKET RPAREN COLON UNIT EQUALS
+    '''
+    p[0] = "Argumentos del método main válidos."
+
+def p_block(p):
+    '''
+    block : LBRACE statements RBRACE
+    '''
+    p[0] = "Bloque de código válido."
 
 def p_statements(p):
     '''
     statements : statement
                | statements statement
     '''
+    # Esta estructura permite múltiples declaraciones en un bloque.
+    # No es necesario asignar un valor a p[0] en esta definición.
 
 def p_statement(p):
     '''
     statement : expression SEMICOLON
-              | for_loop
               | println_statement
-              | nombre_assignment
-              | while_loop
+              | assignment
     '''
-    p[0] = "Declaración válida."
-    
-def p_nombre_assignment(p):
-    'nombre_assignment : NOMBRE EQUALS KEVIN'
-    p[0] = "Asignación de nombre a Kevin válida."
-
-def p_while_loop(p):
-    '''
-    while_loop : WHILE LPAREN condition RPAREN LEFT_BRACE statements RIGHT_BRACE
-    '''
-    p[0] = "Bucle While válido."
-    
-def p_for_loop(p):
-    '''
-    for_loop : FOR LPAREN assignment SEMICOLON condition SEMICOLON increment RPAREN LEFT_BRACE statements RIGHT_BRACE
-    '''
-    p[0] = "Bucle For válido."
+    # Esta definición permite expresiones, declaraciones de impresión y asignaciones como declaraciones válidas.
 
 def p_println_statement(p):
     '''
-    println_statement : PRINT LPAREN expression RPAREN SEMICOLON
-                      | PRINT LPAREN STRING RPAREN SEMICOLON
+    println_statement : PRINTLN LPAREN expression RPAREN SEMICOLON
+                      | PRINTLN LPAREN STRING_LITERAL RPAREN SEMICOLON
     '''
     p[0] = "Declaración de impresión válida."
+    
+def p_expression(p):
+    '''
+    expression : term
+               | expression PLUS term
+               | expression MINUS term
+    '''
+    # Completa con lógica similar a la mostrada anteriormente.
+
+def p_term(p):
+    '''
+    term : factor
+         | term TIMES factor
+         | term DIVIDE factor
+    '''
+    # Completa con lógica para manejar términos.
+
+def p_factor(p):
+    '''
+    factor : NUMBER
+           | ID
+           | LPAREN expression RPAREN
+    '''
+    # Ya está correctamente definido.
+
+# Para `p_assignment`, asegúrate de que está correctamente definido.
+# Si tienes otras estructuras como bucles for/while, condicionales, etc., asegúrate de definirlas aquí.
 
 def p_assignment(p):
     '''
     assignment : ID EQUALS expression
     '''
     p[0] = "Asignación válida."
-
-def p_condition(p):
-    '''
-    condition : expression
-    '''
-    p[0] = "Condición válida."
-
-def p_expression(p):
-    '''
-    expression : expression PLUS expression
-               | expression MINUS expression
-               | expression TIMES expression
-               | expression DIVIDE expression
-               | LPAREN expression RPAREN
-               | ID
-               | NUMBER
-               | INCREMENT
-               | STRING
-               | expression LESS_THAN expression
-               | expression GREATER_THAN expression
-               | expression LESS_THAN_EQUAL expression
-               | expression GREATER_THAN_EQUAL expression
-               | expression EQUAL_EQUAL expression
-               | expression NOT_EQUAL expression
-    '''
-    p[0] = "Expresión válida."
-
-def p_increment(p):
-    '''
-    increment : ID INCREMENT
-    '''
-    p[0] = "Incremento válido."
 
 
 def p_error(p):
